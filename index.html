@@ -3,34 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Higher or Lower Game</title>
+  <title>Stereotyped Academic Study Paths</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="game-container">
-    <h1>Higher or Lower</h1>
+    <h1>Stereotyped Academic Study Paths</h1>
 
-    <!-- First item (City A) -->
-    <div id="item1" class="item">
-      <p id="item1-name">Item 1: City A</p>
-      <p id="item1-value">Value: 500,000</p>
-      <img id="item1-img" src="Images/DCPE.png" alt="Image of City A">
-    </div>
+    <div class="items-container">
+      <!-- First item (left choice) -->
+      <div id="item1" class="item">
+        <p id="item1-name">Item 1: City A</p>
+        <p id="item1-value">Value: 500,000</p>
+        <img id="item1-img" src="Images/DCPE.png" alt="Image of City A">
+        <button id="higher-btn" class="choice-btn">Higher</button>
+      </div>
 
-    <!-- Second item (City B) -->
-    <div id="item2" class="item">
-      <p id="item2-name">Item 2: City B</p>
-      <img id="item2-img" src="Images/DEEE.png" alt="Image of City B">
-    </div>
-
-    <!-- Buttons for higher or lower -->
-    <div class="buttons">
-      <button id="higher-btn">Higher</button>
-      <button id="lower-btn">Lower</button>
+      <!-- Second item (right choice) -->
+      <div id="item2" class="item">
+        <p id="item2-name">Item 2: City B</p>
+        <img id="item2-img" src="Images/DEEE.png" alt="Image of City B">
+        <button id="lower-btn" class="choice-btn">Lower</button>
+      </div>
     </div>
 
     <!-- Feedback message -->
-    <p id="result"></p>
+    <p id="question">Is the choice on the left higher or lower?</p>
 
     <!-- Score display -->
     <p id="score">Score: 0</p>
