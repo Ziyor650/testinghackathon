@@ -1,90 +1,85 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #282c34;
-  color: white;
-  margin: 0;
-  padding: 0;
+const data = [
+  { item: "City A", value: 500000, image: "Images/DCPE.png" },
+  { item: "City B", value: 1200000, image: "Images/DEEE.png" },
+  { item: "City C", value: 750000, image: "images/city-c.png" },
+  { item: "City D", value: 250000, image: "images/city-d.png" },
+];
+
+let currentItem = 0;
+let score = 0;
+
+const item1 = document.getElementById("item1");
+const item2 = document.getElementById("item2");
+const result = document.getElementById("result");
+const scoreDisplay = document.getElementById("score");
+const retryBtn = document.getElementById("retry-btn");
+
+function updateItems() {
+  // Get the current item and the next item
+  const itemA = data[currentItem];
+  const itemB = data[(currentItem + 1) % data.length];
+
+  // Set the values in the HTML
+  document.getElementById("item1-name").textContent = `Item 1: ${itemA.item}`;
+  document.getElementById("item1-value").textContent = `Value: ${itemA.value.toLocaleString()}`;
+  document.getElementById("item1-img").src = itemA.image;
+  document.getElementById("item2-name").textContent = `Item 2: ${itemB.item}`;
+  document.getElementById("item2-img").src = itemB.image;
+
+  // Hide item1's value after the first round
+  if (currentItem > 0) {
+    document.getElementById("item1-value").style.visibility = "hidden";
+  } else {
+    document.getElementById("item1-value").style.visibility = "visible";
+  }
 }
 
-.game-container {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #1e1e2f;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
+function handleChoice(isHigher) {
+  const itemA = data[currentItem];
+  const itemB = data[(currentItem + 1) % data.length];
+
+  // Determine if the choice is correct
+  if ((isHigher && itemB.value > itemA.value) || (!isHigher && itemB.value < itemA.value)) {
+    score++;
+    result.textContent = "Correct!";
+  } else {
+    result.textContent = "Incorrect!";
+    document.getElementById("higher-btn").disabled = true;
+    document.getElementById("lower-btn").disabled = true;
+    retryBtn.style.display = "block";
+    return;
+  }
+
+  // Update the score
+  scoreDisplay.textContent = `Score: ${score}`;
+
+  // Move to the next item
+  currentItem = (currentItem + 1) % data.length;
+  updateItems();
 }
 
-h1 {
-  font-size: 2.5rem;
-  color: #61dafb;
+function resetGame() {
+  score = 0;
+  scoreDisplay.textContent = `Score: ${score}`;
+  result.textContent = "";
+  currentItem = 0;
+  retryBtn.style.display = "none";
+  document.getElementById("higher-btn").disabled = false;
+  document.getElementById("lower-btn").disabled = false;
+  updateItems();
 }
 
-.items-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  margin: 20px 0;
-}
+document.getElementById("higher-btn").addEventListener("click", function () {
+  handleChoice(true);
+});
 
-.item {
-  flex: 1;
-  text-align: center;
-  padding: 15px;
-  border: 2px solid #61dafb;
-  border-radius: 10px;
-  background-color: #3b3b5c;
-}
+document.getElementById("lower-btn").addEventListener("click", function () {
+  handleChoice(false);
+});
 
-.item img {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-  margin: 10px 0;
-  border-radius: 10px;
-}
+retryBtn.addEventListener("click", function () {
+  resetGame();
+});
 
-.choice-btn {
-  margin-top: 10px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #61dafb;
-  color: #282c34;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.choice-btn:hover {
-  background-color: #21a1f1;
-}
-
-#question {
-  margin: 20px 0;
-  font-size: 1.2rem;
-  color: #ddd;
-}
-
-#score {
-  font-size: 1.1rem;
-  color: #ddd;
-}
-
-.retry-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: white;
-  background-color: #ff6b6b;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.retry-button:hover {
-  background-color: #ff4b4b;
-}
-
+// Initialize game
+updateItems();
