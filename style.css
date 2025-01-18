@@ -21,6 +21,12 @@ h1 {
   color: #61dafb;
 }
 
+#question {
+  margin: 20px 0;
+  font-size: 1.2rem;
+  color: #ddd;
+}
+
 .items-container {
   display: flex;
   justify-content: space-around;
@@ -60,12 +66,6 @@ h1 {
 
 .choice-btn:hover {
   background-color: #21a1f1;
-}
-
-#question {
-  margin: 20px 0;
-  font-size: 1.2rem;
-  color: #ddd;
 }
 
 #score {
