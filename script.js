@@ -70,4 +70,3 @@ retryBtn.addEventListener("click", resetGame);
 
 // Initialize game
 updateItems();
-
