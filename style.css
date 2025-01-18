@@ -52,10 +52,11 @@ h1 {
 }
 
 .button-container {
+  flex: 1;
   display: flex;
   justify-content: center;
   gap: 10px; /* Adds spacing between buttons */
-  margin-top: 10px; /* Adds spacing between image and buttons */
+  margin-top: 20px; /* Adds spacing above the buttons */
 }
 
 .choice-btn {
